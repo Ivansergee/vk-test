@@ -169,6 +169,17 @@ export default {
   },
   methods: {
     async getUsers() {
+      if (!this.$store.state.isAuthenticated) {
+        toast({
+          message: 'Вы не авторизованы!',
+          type: "is-danger",
+          dismissible: true,
+          duration: 10000,
+          pauseOnHover: true,
+          position: "top-center",
+        });
+        return
+      }
       const res = await jsonp('https://api.vk.com/method/users.search', {
         access_token: this.$store.state.token,
         v: '5.154',
