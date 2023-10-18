@@ -14,18 +14,18 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/:id',
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/user/:id',
     name: 'details',
     meta: {
       title: 'VK Test'
     },
     component: UserDetailsView
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView
-  }
 ]
 
 const router = createRouter({
