@@ -21,6 +21,10 @@ export default createStore({
       state.token = token;
       state.isAuthenticated = true;
     },
+    removeToken(state) {
+      state.token = null;
+      state.isAuthenticated = false;
+    },
   },
   actions: {
   },

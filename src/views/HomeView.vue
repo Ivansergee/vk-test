@@ -3,9 +3,14 @@
     <div class="columns">
       <div class="column is-8 is-offset-2">
         <div class="level is-mobile">
-          <router-link :to="{name: 'home'}"><h1 class="title is-4 mb-0">VK Test</h1></router-link>
-          <a class="button is-success" :href="loginURL" v-if="!$store.state.isAuthenticated">Авторизоваться</a>
-          <a class="button is-success" :href="loginURL" v-else>Обновить токен</a>
+          <div class="level-left">
+            <router-link :to="{name: 'home'}"><h1 class="title is-4 mb-0">VK Test</h1></router-link>
+          </div>
+          <div class="level-right">
+            <a class="button is-success" :href="loginURL" v-if="$store.state.isAuthenticated">Обновить токен</a>
+            <a class="button is-success" :href="loginURL" v-else>Авторизоваться</a>
+            <a class="button is-danger ml-2" @click="logout" v-if="$store.state.isAuthenticated">Выйти</a>
+          </div>
         </div>
         <div class="search">
           <div class="control">
@@ -151,7 +156,7 @@ export default {
   },
   computed:{
     loginURL(){
-      return `https://oauth.vk.com/authorize?client_id=51769298&display=page&redirect_uri=${process.env.VUE_APP_BASE_URL}/login&response_type=token&scope=friends,groups&v=5.131`;
+      return `https://oauth.vk.com/authorize?client_id=${process.env.VUE_APP_CLIENT_ID}&display=page&redirect_uri=${process.env.VUE_APP_BASE_URL}/login&response_type=token&scope=friends,groups&v=5.131`;
     }
   },
   mounted() {
@@ -352,6 +357,10 @@ export default {
     loadNext() {
       this.friendsPart.push(...this.friendsList.slice(this.partIndex, this.partIndex + 15));
       this.partIndex += 15;
+    },
+    logout() {
+      localStorage.removeItem('access_token');
+      this.$store.commit("removeToken");
     }
   }
 }
