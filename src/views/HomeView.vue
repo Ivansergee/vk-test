@@ -194,7 +194,7 @@ export default {
       })
       if (res.error) {
         toast({
-          message: res.error.error_msg,
+          message: `${user.first_name} ${user.last_name}: ${res.error.error_msg}`,
           type: "is-danger",
           dismissible: true,
           duration: 10000,
@@ -218,6 +218,7 @@ export default {
       this.sourceLength = this.sourceList.length;
       localStorage.setItem('sourceLen', this.sourceLength);
       this.friendsList = [];
+      this.partIndex = 15;
       for (let user of this.sourceList) {
         const res = await jsonp('https://api.vk.com/method/friends.get', {
           access_token: this.$store.state.token,
