@@ -194,7 +194,7 @@ export default {
       })
       if (res.error) {
         toast({
-          message: `${user.first_name} ${user.last_name}: ${res.error.error_msg}`,
+          message: res.error.error_msg,
           type: "is-danger",
           dismissible: true,
           duration: 10000,
@@ -229,7 +229,7 @@ export default {
         })
         if (res.error) {
           toast({
-            message: res.error.error_msg,
+            message: `${user.first_name} ${user.last_name}: ${res.error.error_msg}`,
             type: "is-danger",
             dismissible: true,
             duration: 10000,
