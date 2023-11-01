@@ -344,16 +344,9 @@ export default {
       if (refCount === 1){
         return 'white';
       }
-      const refPercent = Math.round((refCount / this.sourceLength) * 100)
-      if (refPercent === 100) {
-        return 'hsl(141, 53%, 41%)';
-      } else if (refPercent > 75) {
-        return 'hsl(141, 70%, 50%);';
-      } else if (refPercent > 50) {
-        return 'hsl(141, 90%, 70%);';
-      } else if (refPercent > 25) {
-        return 'hsl(141, 70%, 80%);';
-      }
+      const refPercent = Math.round((refCount / this.sourceLength) * 100);
+      console.log(refPercent);
+      return `hsl(120, ${refPercent}%, 50%)`;
     },
     loadNext() {
       this.friendsPart.push(...this.friendsList.slice(this.partIndex, this.partIndex + 15));
